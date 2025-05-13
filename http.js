@@ -10,18 +10,26 @@ const todos = [
 const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'application/json')
 
-  if(req.url ==='/'){
+  if(req.url ==='/todos'){
     res.writeHead(200)
-    res.end(JSON.stringify({ message: 'Success'}))
+    res.end(JSON.stringify({ 
+      status: 'Success',
+      data: todos
+    }))
   } else if (req.url ==='/api/todos') {
     res.writeHead(200)
-    res.end(JSON.stringify({ message: todos}))
-  } else if (req.url === '/api/todos/count') {
+    res.end(JSON.stringify({ 
+      status: 'success',
+      message: 'todos' }))
+  } else if (req.url === '/todos/count') {
     res.writeHead(200)
     res.end(JSON.stringify({ count: todos.length}))
-  } else if (req.url === '/api/health') {
+  } else if (req.url === '/health') {
     res.writeHead(200)
-    res.end(JSON.stringify({ message: ok}))
+    res.end(JSON.stringify({ 
+      status: 'success',
+      message: 'ok'
+    }))
   } else {
     res.writeHead(404)
     res.end(JSON.stringify({ error: 'Cannot find'}))
@@ -30,5 +38,5 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3000, () => {
-  console.log('http://localhost:3000/api/health ');
+  console.log('http://localhost:3000/health ');
 })
